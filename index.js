@@ -4,6 +4,7 @@ const app = express()
 const pool = require('./config/database')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const cors = require('cors')
 const port = 3000
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -15,6 +16,9 @@ if (!JWT_SECRET) {
 
 
 
+app.use(cors({
+    origin: '*', // Allow all origins
+})); // Add this line
 app.use(express.json()); // For parsing application/json
 app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
