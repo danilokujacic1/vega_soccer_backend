@@ -88,11 +88,6 @@ app.post('/log-match', authenticateToken, async (req, res) => {
       return res.status(400).json({ message: 'Players must be different' });
     }
 
-    // Validate scores are numbers
-    if (typeof first_player_score !== 'number' || typeof second_player_score !== 'number') {
-      return res.status(400).json({ message: 'Scores must be numbers' });
-    }
-
     // Insert match into database
     const result = await pool.query(
       'INSERT INTO matches (first_player_name, second_player_name, first_player_score, second_player_score) VALUES ($1, $2, $3, $4) RETURNING *',
